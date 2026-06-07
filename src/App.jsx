@@ -7,7 +7,10 @@ import python1 from './assets/python1.jpg'
 import bank1 from './assets/bank1.png'
 import jana1 from './assets/jana1.png'
 import rpa from './assets/rpa.jpg'
+import genututor from './assets/gentutor.png'
+import sqlstudio from './assets/sqlstudio.png'
 // --- Shared Components ---
+
 
 const TopNavBar = () => {
   const navLinks = ["Home", "About", "Portfolio", "Projects", "Resume"];
@@ -174,45 +177,83 @@ const AboutMe = () => {
   );
 };
 
-const ProjectCard = ({ title, description, tags, status, image }) => (
-  <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500 group">
-    {/* Project Image */}
-    <div className="aspect-video bg-gray-100 relative overflow-hidden">
-      <img 
-        src={image} 
-        alt={title}
-        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-      />
-    </div>
-    
-    {/* Project Content */}
-    <div className="p-8">
-      <h3 className="text-2xl font-bold text-slate-900 mb-4">{title}</h3>
-      
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {tags.map((tag) => (
-          <span key={tag} className="bg-indigo-50 text-indigo-600 text-xs font-bold px-3 py-1 rounded-full">
-            {tag}
-          </span>
-        ))}
+const ProjectCard = ({ title, description, tags, status, image, link }) => {
+  const CardWrapper = link ? 'a' : 'div';
+  const extraProps = link ? { href: link, target: '_blank', rel: 'noopener noreferrer' } : {};
+
+  return (
+    <CardWrapper
+      {...extraProps}
+      className={`block bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500 group text-inherit no-underline ${
+        link ? 'cursor-pointer hover:-translate-y-2 hover:border-indigo-100' : ''
+      }`}
+    >
+      {/* Project Image */}
+      <div className="aspect-video bg-gray-100 relative overflow-hidden">
+        <img 
+          src={image} 
+          alt={title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        {link && (
+          <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span className="bg-white text-slate-900 font-semibold px-4 py-2 rounded-lg shadow-md flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 text-sm">
+              View Project
+              <svg className="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </span>
+          </div>
+        )}
       </div>
       
-      {/* Description */}
-      <p className="text-slate-600 text-sm leading-relaxed mb-6">
-        {description}
-      </p>
-      
-      {/* Status */}
-      <div className="flex items-center gap-2">
-        <span className="text-slate-500 font-semibold text-sm">Status:</span>
-        <span className="bg-green-50 text-green-700 text-xs font-bold px-3 py-1 rounded-full">
-          {status}
-        </span>
+      {/* Project Content */}
+      <div className="p-8">
+        <div className="flex justify-between items-start mb-4">
+          <h3 className="text-2xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors duration-300">
+            {title}
+          </h3>
+          {link && (
+            <span className="text-indigo-600 group-hover:scale-110 transition-transform duration-300 mt-1 shrink-0 ml-2">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </span>
+          )}
+        </div>
+        
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {tags.map((tag) => (
+            <span key={tag} className="bg-indigo-50 text-indigo-600 text-xs font-bold px-3 py-1 rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+        
+        {/* Description */}
+        <p className="text-slate-600 text-sm leading-relaxed mb-6">
+          {description}
+        </p>
+        
+        {/* Status */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-slate-500 font-semibold text-sm">Status:</span>
+            <span className="bg-green-50 text-green-700 text-xs font-bold px-3 py-1 rounded-full">
+              {status}
+            </span>
+          </div>
+          {link && (
+            <span className="text-indigo-600 font-semibold text-sm group-hover:underline flex items-center gap-1 transition-colors duration-300">
+              Visit Site →
+            </span>
+          )}
+        </div>
       </div>
-    </div>
-  </div>
-);
+    </CardWrapper>
+  );
+};
 
 const CTA = () => (
   <section id="resume" className="py-20 px-6">
@@ -313,11 +354,26 @@ export default function App() {
     {/* Projects Grid */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
       <ProjectCard 
+        title="Adaptive Learning Platform"
+        description="Built an adaptive learning platform using quiz-based assessments to determine knowledge level, dynamically generating personalized course content via Ollama LLM API."
+        tags={["React", "Ollama LLM API", "JavaScript"]}
+        status="Completed"
+        image={genututor}
+      />
+      <ProjectCard 
+        title="SQL Studio"
+        description="Built an interactive SQL learning platform with PostgreSQL sandbox execution."
+        tags={["React", "Ollama LLM API", "JavaScript"]}
+        status="Completed"
+        image={sqlstudio}
+      />
+      <ProjectCard 
         title="ONLINE ART GALLERY"
         description="Web Application that can be accessed by Customers and Artists, where artists can publish their artwork and customers can view and buy their interested artwork."
         tags={["Python", "Django", "PostgreSQL"]}
         status="Completed"
         image={python1}
+        link="https://aravindkodamanchili123.pythonanywhere.com/"
       />
       
       <ProjectCard 
@@ -326,6 +382,7 @@ export default function App() {
         tags={["React", "Node.js", "MongoDB", "Express"]}
         status="Completed"
         image={bank1}
+        link="https://mswdbankings14.web.app/"
       />
       
       <ProjectCard 
@@ -334,6 +391,7 @@ export default function App() {
         tags={["React", "SpringBoot", "MySQL"]}
         status="Completed"
         image={jana1}
+        link="https://jfsd-react-app.vercel.app/"
       />
       
       <ProjectCard 
@@ -342,6 +400,7 @@ export default function App() {
         tags={["React", "Node.js", "MongoDB", "Express"]}
         status="Completed"
         image={rpa}
+        link="https://klef-rpaclub.vercel.app/"
       />
     </div>
     
