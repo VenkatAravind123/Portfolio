@@ -1,23 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import profile from './assets/aravindprofile.png'
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaPhone, FaTimes } from "react-icons/fa";
 import python1 from './assets/python1.jpg'
 import bank1 from './assets/bank1.png'
 import jana1 from './assets/jana1.png'
 import rpa from './assets/rpa.jpg'
 import genututor from './assets/gentutor.png'
 import sqlstudio from './assets/sqlstudio.png'
+import detail from './details';
 // --- Shared Components ---
 
 
-const TopNavBar = () => {
-  const navLinks = ["Home", "About", "Portfolio", "Projects", "Resume"];
+const TopNavBar = ({ onHireMeClick }) => {
+  const navLinks = ["Home", "About", "Portfolio", "Resume"];
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-        <div className="text-2xl font-bold text-indigo-600">Venkat Aravind</div>
+        <div className="text-2xl font-bold text-indigo-600">Sri Venkat Aravind</div>
         <div className="hidden md:flex space-x-8">
           {navLinks.map((link) => (
             <a 
@@ -32,8 +31,8 @@ const TopNavBar = () => {
           ))}
         </div>
         <div className="flex items-center space-x-4">
-          <button className="text-gray-600 hover:text-indigo-600 font-medium hidden lg:block">View Work</button>
-          <button className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition-all active:scale-95">
+          <a href="#projects" className="text-gray-600 hover:text-indigo-600 font-medium hidden lg:block">View Work</a>
+          <button onClick={onHireMeClick} className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition-all active:scale-95">
             Hire Me
           </button>
         </div>
@@ -42,25 +41,25 @@ const TopNavBar = () => {
   );
 };
 
-const Hero = () => {
+const Hero = ({ onHireMeClick }) => {
   return (
     <section id="home" className="pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-        <div className="flex-1 space-y-6">
+        <div className="flex-1 space-y-7 gap-7">
           <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm">Hello, I'm</span>
-          <h1 className="text-6xl md:text-7xl font-extrabold text-slate-900 leading-tight">
-            Venkat Aravind
+          <h1 className="text-6xl md:text-7xl font-extrabold text-slate-900 leading-tight whitespace-nowrap">
+            Sri Venkat Aravind
           </h1>
           <p className="text-xl text-slate-600">
             I am Passionate <span className="text-indigo-600 italic font-semibold">Developer</span> from India
           </p>
           <div className="flex space-x-4 pt-4">
-            <button className="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200">
+            <button onClick={onHireMeClick} className="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200">
               Hire Me
             </button>
-            <button className="border-2 border-indigo-600 text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-all">
+            <a href="#projects" className="border-2 border-indigo-600 text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-all inline-block text-center">
               View Work
-            </button>
+            </a>
           </div>
           <div className="flex space-x-4 pt-6">
   <a href="https://github.com/VenkatAravind123" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all duration-300 hover:scale-110">
@@ -255,7 +254,7 @@ const ProjectCard = ({ title, description, tags, status, image, link }) => {
   );
 };
 
-const CTA = () => (
+const CTA = ({ onHireMeClick }) => (
   <section id="resume" className="py-20 px-6">
     <div className="max-w-7xl mx-auto bg-slate-900 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
       <div className="relative z-10 space-y-8">
@@ -266,7 +265,7 @@ const CTA = () => (
           I am currently available for freelance projects and full-time opportunities. Let's create something extraordinary together.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-          <button className="bg-white text-slate-900 px-10 py-4 rounded-xl font-bold hover:bg-indigo-50 transition-all">
+          <button onClick={onHireMeClick} className="bg-white text-slate-900 px-10 py-4 rounded-xl font-bold hover:bg-indigo-50 transition-all">
             Start a Conversation
           </button>
           <button className="border-2 border-slate-700 text-white px-10 py-4 rounded-xl font-bold hover:bg-slate-800 transition-all">
@@ -285,31 +284,140 @@ const Footer = () => (
   <footer className="py-12 border-t border-gray-100 mt-10">
     <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
       <div className="space-y-4 text-center md:text-left max-w-xs">
-        <div className="text-xl font-bold text-indigo-600">Venkat Aravind</div>
+        <div className="text-xl font-bold text-indigo-600">Sri Venkat Aravind</div>
         <p className="text-slate-500 text-sm">Crafting premium digital experiences through elegant code and thoughtful design.</p>
       </div>
       <div className="flex space-x-8 text-sm font-semibold text-slate-600">
-        <a href="#" className="hover:text-indigo-600 transition-colors">GitHub</a>
-        <a href="#" className="hover:text-indigo-600 transition-colors">LinkedIn</a>
-        <a href="#" className="hover:text-indigo-600 transition-colors">Twitter</a>
-        <a href="#" className="hover:text-indigo-600 transition-colors">YouTube</a>
+        <a href="https://github.com/VenkatAravind123" className="hover:text-indigo-600 transition-colors">GitHub</a>
+        <a href="https://www.linkedin.com/in/sri-venkat-aravind-kodamanchili-365b0b26a/" className="hover:text-indigo-600 transition-colors">LinkedIn</a>
+        <a href="https://x.com/VenkatA1267954" className="hover:text-indigo-600 transition-colors">Twitter</a>
       </div>
       <div className="text-slate-400 text-sm">
-        © 2024 Venkat Aravind. Built with Precision.
+        © 2026 Sri Venkat Aravind. Built with Precision.
       </div>
     </div>
   </footer>
 );
 
+// --- Contact Modal ---
+
+const ContactModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity duration-300"
+        onClick={onClose}
+      />
+      
+      {/* Modal Content */}
+      <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all duration-300 scale-100 border border-slate-100 animate-in fade-in zoom-in-95 duration-200">
+        {/* Header background gradient */}
+        <div className="bg-gradient-to-r from-indigo-600 to-indigo-800 p-8 text-white relative">
+          <button 
+            onClick={onClose}
+            className="absolute top-6 right-6 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-all"
+            aria-label="Close modal"
+          >
+            <FaTimes size={18} />
+          </button>
+          <span className="text-indigo-200 text-xs font-bold tracking-widest uppercase">GET IN TOUCH</span>
+          <h3 className="text-3xl font-extrabold mt-1">Let's Work Together!</h3>
+          <p className="text-indigo-100 text-sm mt-2 max-w-sm">
+            I'm currently available for freelance projects and full-time opportunities. Drop a line!
+          </p>
+        </div>
+
+        {/* Contact info list */}
+        <div className="p-8 space-y-6">
+          <div className="space-y-4">
+            {/* Email Contact */}
+            <a 
+              href="mailto:srivenkataravind.k@gmail.com" 
+              className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all group"
+            >
+              <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                <FaEnvelope size={20} />
+              </div>
+              <div className="flex-1">
+                <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Email Me</div>
+                <div className="text-slate-700 font-semibold break-all">{detail.email}</div>
+              </div>
+            </a>
+
+            {/* Phone Contact */}
+            <div 
+              className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all group"
+            >
+              <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                <FaPhone size={20} />
+              </div>
+              <div className="flex-1">
+                <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Call / WhatsApp</div>
+                <div className="text-slate-700 font-semibold">+91 {detail.phone}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Social Links */}
+          <div>
+            <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 text-center">Connect on Social Media</div>
+            <div className="flex justify-center gap-4">
+              <a 
+                href="https://www.linkedin.com/in/sri-venkat-aravind-kodamanchili-365b0b26a/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all duration-300 hover:scale-110"
+              >
+                <FaLinkedin size={22} />
+              </a>
+              <a 
+                href="https://github.com/VenkatAravind123" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all duration-300 hover:scale-110"
+              >
+                <FaGithub size={22} />
+              </a>
+              <a 
+                href="https://x.com/VenkatA1267954" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all duration-300 hover:scale-110"
+              >
+                <FaTwitter size={22} />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="bg-slate-50 px-8 py-4 border-t border-slate-100 flex justify-end">
+          <button 
+            onClick={onClose}
+            className="px-6 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-xl text-sm transition-all"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // --- Main App ---
 
 export default function App() {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-indigo-100 selection:text-indigo-700">
-      <TopNavBar />
+      <TopNavBar onHireMeClick={() => setIsContactOpen(true)} />
       
       <main>
-        <Hero />
+        <Hero onHireMeClick={() => setIsContactOpen(true)} />
         
         <AboutMe />
         
@@ -421,10 +529,12 @@ export default function App() {
   </div>
 </section>
 
-        <CTA />
+        <CTA onHireMeClick={() => setIsContactOpen(true)} />
       </main>
 
       <Footer />
+      
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </div>
   );
 }
