@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import profile from './assets/aravindprofile.png'
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaPhone, FaTimes } from "react-icons/fa";
 import python1 from './assets/python1.jpg'
